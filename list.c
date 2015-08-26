@@ -55,16 +55,7 @@ struct node* append(struct node*head,int data){
 	return head;
 
 }
-/*
-struct node*altAppend(struct node*head, int data){
-	//struct node*current = tail;
-	struct node*newNode = malloc(sizeof(struct node));
-	newNode->val = data;
-	struct node*current;
 
-	return tail;
-}
-*/
 /*********************************************************************
  ** Name: print
  ** Description: prints list
@@ -217,29 +208,6 @@ struct node* clear(struct node*head){
        free(current);
        current = next;
    }
-	/*
-	do{
-		//printf("in the do while\n");
-
-		int count = 0;
-		for(current;current!=NULL;current=current->next){
-			count++;
-		}
-
-		if list is only one then program segfaults this takes care of that.
-		if (count<1){
-			printf("cleared.\n");
-			exit(0);
-		}
-
-
-		head->next = current->next;
-		free(current);
-		current = head->next;
-
-
-	}while(head->next!=NULL);
-*/
 
 }
 /*********************************************************************
@@ -249,10 +217,10 @@ struct node* clear(struct node*head){
  ** Output: none
  *********************************************************************/
 struct node* removing(struct node*head, int pos){
-	//seg faults when try to remove a node of length one.
-	struct node*current= malloc(sizeof(struct node));
+	//seg faults when try to remove a node at position one or zero.
+	struct node*current;
 	current = head;
-	struct node*previous;
+	struct node*previous = malloc(sizeof(struct node));
 	int counter = 0;
 	while(current!=NULL){
 		previous = current;
@@ -264,7 +232,10 @@ struct node* removing(struct node*head, int pos){
 		}
 	}
 
+
 	previous->next = current->next;
+	// if current next is null then previous will be null
+	// what if previous is head?
 	free(current);
 
 	return head;
@@ -311,8 +282,12 @@ int main(){
 				scanf("%1s", &choice);
 
 				if(choice=='y'){
-					printf("What posotion do you want to enter a number to?:\n");
+					printf("What posotion do you want to enter a number to?(cant be 0 or 1) :\n");
 					scanf("%d", &position);
+					if (position == 0 || position ==1){
+						printf("Must be greater than zero or one!\n");
+						break;
+					}
 					printf("what is this numbers value? \n");
 					scanf("%d",&num);
 					head = insert_middle(head, num, position);
