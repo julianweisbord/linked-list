@@ -109,33 +109,33 @@ struct node* sort_ascending(struct node* head){
     int swapped, i;
     struct node *ptr1;
     struct node *lptr = NULL;
- 
-    /* Checking for empty list 
+
+    /* Checking for empty list
     if (ptr1 == NULL)
     	printf("is null");
         return;
-    */    
- 
+    */
+
     do
     {
         swapped = 0;
         ptr1 = head;
- 
+
         while (ptr1->next != lptr)
         {
             if (ptr1->val > ptr1->next->val)
-            { 
+            {
                 swap(ptr1, ptr1->next);
                 swapped = 1;
             }
             ptr1 = ptr1->next;
         }
         lptr = ptr1;
-        
+
     }
     while (swapped);
     return head;
-    	
+
 }
 /*********************************************************************
  ** Name: sort_descending
@@ -147,21 +147,21 @@ struct node* sort_descending(struct node *head){
     int swapped, i;
     struct node *ptr1;
     struct node *lptr = NULL;
- 
-    /* Checking for empty list 
+
+    /* Checking for empty list
     if (ptr1 == NULL)
         return;
-    */    
- 
+    */
+
     do
     {
         swapped = 0;
         ptr1 = head;
- 
+
         while (ptr1->next != lptr)
         {
             if (ptr1->val < ptr1->next->val)
-            { 
+            {
                 swap(ptr1, ptr1->next);
                 swapped = 1;
             }
@@ -210,8 +210,8 @@ struct node* clear(struct node*head){
 	//current = head->next;
 	struct node* current = head;
   	 struct node* next;
- 
-   while (current != NULL) 
+
+   while (current != NULL)
    {
        next = current->next;
        free(current);
@@ -220,24 +220,24 @@ struct node* clear(struct node*head){
 	/*
 	do{
 		//printf("in the do while\n");
-		
+
 		int count = 0;
 		for(current;current!=NULL;current=current->next){
 			count++;
 		}
-		
+
 		if list is only one then program segfaults this takes care of that.
 		if (count<1){
 			printf("cleared.\n");
 			exit(0);
 		}
-		
-		
+
+
 		head->next = current->next;
 		free(current);
 		current = head->next;
-		
-		
+
+
 	}while(head->next!=NULL);
 */
 
@@ -259,11 +259,11 @@ struct node* removing(struct node*head, int pos){
 		counter++;
 		current=current->next;
 		if(counter ==(pos-1)){
-			
+
 			break;
 		}
 	}
-	
+
 	previous->next = current->next;
 	free(current);
 
@@ -288,14 +288,14 @@ int main(){
 		do {
 			printf("Enter a number: \n");
 			scanf("%d", &num);
-			
+
 			printf("Do you want to push or append?(p or a):\n");
 			scanf("%1s", &ans4);
 			if(ans4=='a'){
 				//head = altAppend(head, num);
 				head = append(head, num);
 			}
-			else if(ans4=='p'){	
+			else if(ans4=='p'){
 				head =push(head, num);
 			}
 			printf("Would you like to remove a number?(y or n): \n");
@@ -304,7 +304,7 @@ int main(){
 				printf("what is the position of the number that should be deleted?:\n");
 				scanf("%d",&location);
 				head = removing(head, location);
-			}	
+			}
 
 			do{
 				printf("do you want to enter something into the middle of the list?(y or n): \n");
@@ -337,7 +337,7 @@ int main(){
         	//head=sort_ascending(head);
         	head = sort_ascending(head);
         }
-        else if(ans2 == 'd'){ 
+        else if(ans2 == 'd'){
         	head = sort_descending(head);
 
         }
@@ -361,10 +361,3 @@ int main(){
 	return 0;
 
 }
-
-
-
-
-
-
-
