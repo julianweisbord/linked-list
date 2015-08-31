@@ -8,12 +8,15 @@
  ** Output: length
  *********************************************************************/
 int length(struct node*head){
-	struct node*current = head;
-
 	int count = 0;
-	while(current!=NULL){
-		count++;
-		current = current->next;
+	if(head){
+		struct node*current = head;
+
+
+		while(current!=NULL){
+			count++;
+			current = current->next;
+		}
 	}
 	return count;
 
@@ -25,11 +28,11 @@ int length(struct node*head){
  ** Output: node
  *********************************************************************/
 struct node* push(struct node*head, int data){
-	struct node* newNode = malloc(sizeof(struct node));
-	newNode->val =data;
-	newNode->next = head;
-	head = newNode;
-	return head;
+		struct node* newNode = malloc(sizeof(struct node));
+		newNode->val =data;
+		newNode->next = head;
+		head = newNode;
+		return head;
 }
 /*********************************************************************
  ** Name: append
@@ -38,21 +41,22 @@ struct node* push(struct node*head, int data){
  ** Output: node
  *********************************************************************/
 struct node* append(struct node*head,int data){
-	struct node* current = head;
-	struct node*newNode = malloc(sizeof(struct node));
-	newNode->val = data;
-	newNode->next = NULL;
-	//special case for length 0
-	if(current == NULL){
-		head =newNode;
-	}
-	else{
-		while(current->next!=NULL){
-			current = current->next;
+		struct node* current = head;
+		struct node*newNode = malloc(sizeof(struct node));
+		newNode->val = data;
+		newNode->next = NULL;
+		//special case for length 0
+		if(current == NULL){
+			head =newNode;
 		}
-		current->next = newNode;
-	}
-	return head;
+		else{
+			while(current->next!=NULL){
+				current = current->next;
+			}
+			current->next = newNode;
+		}
+
+		return head;
 
 }
 
@@ -63,19 +67,23 @@ struct node* append(struct node*head,int data){
  ** Output: list
  *********************************************************************/
 void print(struct node*head, int data){
-	struct node*current;
-	int count = 0;
-	current=head;
-	while(current!=NULL){
-		printf("The value of the node at position %d is %d\n",(count+1),current->val);
-		count++;
-		current=current->next;
+	if(head){
+		struct node*current;
+		int count = 0;
+		current=head;
+		while(current!=NULL){
+			++count;
+			printf("The value of the node at position %d is %d\n",count,current->val);
+			current=current->next;
+		}
+		// current = NULL;
+		if(current == NULL){
+			printf("End of list\n");
+		}
 	}
-	current = NULL;
-	if(current == NULL){
-		printf("End of list\n");
+	else{
+		printf("No list items...\n");
 	}
-
 
 }
 /*********************************************************************
@@ -97,7 +105,8 @@ void swap(struct node *a, struct node *b)
  ** Output: ordered list
  *********************************************************************/
 struct node* sort_ascending(struct node* head){
-    int swapped, i;
+  if(head){
+		int swapped, i;
     struct node *ptr1;
     struct node *lptr = NULL;
 
@@ -125,7 +134,8 @@ struct node* sort_ascending(struct node* head){
 
     }
     while (swapped);
-    return head;
+	}
+  return head;
 
 }
 /*********************************************************************
@@ -135,7 +145,8 @@ struct node* sort_ascending(struct node* head){
  ** Output: ordered list
  *********************************************************************/
 struct node* sort_descending(struct node *head){
-    int swapped, i;
+	if(head){
+  	int swapped, i;
     struct node *ptr1;
     struct node *lptr = NULL;
 
@@ -161,7 +172,8 @@ struct node* sort_descending(struct node *head){
         lptr = ptr1;
     }
     while (swapped);
-    return head;
+	}
+  return head;
 }
 
 /*********************************************************************
@@ -171,21 +183,23 @@ struct node* sort_descending(struct node *head){
  ** Output: node to a location
  *********************************************************************/
 struct node* insert_middle(struct node*head, int data, int size){
-	struct node*current=head;
-	struct node*newNode = malloc(sizeof(struct node));
+	if (head){
+		struct node*current=head;
+		struct node*newNode = malloc(sizeof(struct node));
 
-	newNode->val = data;
+		newNode->val = data;
 
-	int counter= 0;
-	for(current; current!=NULL; current=current->next){
-		counter++;
-		if(counter==(size)){
-			break;
+		int counter= 0;
+		for(current; current!=NULL; current=current->next){
+			counter++;
+			if(counter==(size)){
+				break;
+			}
 		}
+		newNode->next =current->next;
+		current->next = newNode;
+		printf("new node value: %d \n", newNode->val);
 	}
-	newNode->next =current->next;
-	current->next = newNode;
-	printf("new node value: %d \n", newNode->val);
 	//current->next = newNode;
 	//newNode = current;
 	return head;
@@ -199,15 +213,17 @@ struct node* insert_middle(struct node*head, int data, int size){
 struct node* clear(struct node*head){
 	//struct node*current= malloc(sizeof(struct node));
 	//current = head->next;
-	struct node* current = head;
-  	 struct node* next;
+	if(head){
+		struct node* current = head;
+	  	 struct node* next;
 
-   while (current != NULL)
-   {
-       next = current->next;
-       free(current);
-       current = next;
-   }
+	   while (current != NULL)
+	   {
+	       next = current->next;
+	       free(current);
+	       current = next;
+	   }
+	}
 
 }
 /*********************************************************************
@@ -216,27 +232,30 @@ struct node* clear(struct node*head){
  ** Input: none
  ** Output: none
  *********************************************************************/
-struct node* removing(struct node*head, int pos){
-	//seg faults when try to remove a node at position one or zero.
-	struct node*current;
-	current = head;
-	struct node*previous = malloc(sizeof(struct node));
+struct node * removing(struct node * head, int pos){
+	//seg faults when try to remove a node at position one .
 	int counter = 0;
-	while(current!=NULL){
-		previous = current;
-		counter++;
-		current=current->next;
-		if(counter ==(pos-1)){
+	struct node* current = head;
+  struct node* previous = NULL;
 
-			break;
-		}
-	}
+    while (current != NULL) {
+        if (counter == pos-1) {
+            if (previous == NULL) {
+                current = current->next;
+                free(head);
+								head = current;
+            } else {
+                previous->next = current->next;
+                free(current);
+                current = previous->next;
+            }
+        } else {
+            previous = current;
+            current = current->next;
+        }
+				++counter;
+    }
 
-
-	previous->next = current->next;
-	// if current next is null then previous will be null
-	// what if previous is head?
-	free(current);
 
 	return head;
 
@@ -272,7 +291,7 @@ int main(){
 			printf("Would you like to remove a number?(y or n): \n");
 			scanf("%1s",&ans5);
 			if(ans5=='y'){
-				printf("what is the position of the number that should be deleted?:\n");
+				printf("what is the position of the number that should be deleted(must be 1 or greater)?:\n");
 				scanf("%d",&location);
 				head = removing(head, location);
 			}
