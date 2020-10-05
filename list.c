@@ -355,3 +355,179 @@ int main(){
 	return 0;
 
 }
+
+//		Linked List Menu Driven Program Using C
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+void create(struct node **);
+void display(struct node *);
+void insert(struct node **);
+void delete (struct node **);
+
+int main()
+{
+    struct node *head = NULL;
+    int option;
+
+    printf("\nPlease select your desired option from below : \n");
+    printf("1.  Create a Linked List.\n");
+    printf("2.  Display the Linked List.\n");
+    printf("3.  Inserting a node to Linked List.\n");
+    printf("4.  Deleting a node from Linked List.\n");
+    printf("5.  EXIT\n");
+    scanf("%d", &option);
+
+    while (option != 5)
+    {
+        switch (option)
+        {
+        case 1:
+            create(&head);
+            display(head);
+            break;
+        case 2:
+            display(head);
+            break;
+        case 3:
+            insert(&head);
+            display(head);
+            break;
+        case 4:
+            delete (&head);
+            display(head);
+            break;
+        default:
+            printf("Please enter a number between 1 and 5 according to your choice : ");
+            break;
+        }
+        printf("\nPlease select your desired option from below : \n");
+        printf("1.  Create a Linked List.\n");
+        printf("2.  Display the Linked List.\n");
+        printf("3.  Inserting a node to Linked List.\n");
+        printf("4.  Deleting a node from Linked List.\n");
+        printf("5.  EXIT\n");
+        scanf("%d", &option);
+    }
+    return 0;
+}
+
+void create(struct node **h)
+{
+    struct node *curr, *ptr;
+    int n, i;
+    printf("Enter the number of nodes you want : ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        curr = (struct node *)malloc(sizeof(struct node));
+        printf("Enter the data of Node %d : ", i + 1);
+        scanf("%d", &curr->data);
+        curr->next = NULL;
+
+        if (*h == NULL)
+        {
+            *h = curr;
+            ptr = curr;
+        }
+        else
+        {
+            ptr->next = curr;
+            ptr = curr;
+        }
+    }
+}
+
+void display(struct node *h)
+{
+    struct node *curr;
+    for (curr = h; curr != NULL; curr = curr->next)
+    {
+        printf("%d\t", curr->data);
+    }
+}
+
+void insert(struct node **h)
+{
+    int v, p;
+    struct node *curr, *ptr;
+    printf("Enter the value you want to add : ");
+    scanf("%d", &v);
+    printf("Enter the position at which you want to enter the value : ");
+    scanf("%d", &p);
+
+    curr = (struct node *)malloc(sizeof(struct node));
+    curr->data = v;
+    curr->next = NULL;
+
+    if (*h == NULL)
+    {
+        (*h) = curr;
+    }
+    else if (p == 0)
+    {
+        curr->next = *h;
+        *h = curr;
+    }
+    else
+    {
+        ptr = *h;
+        int i = 1;
+        while (i < p && ptr->next != NULL)
+        {
+            ptr = ptr->next;
+            i++;
+        }
+        curr->next = ptr->next;
+        ptr->next = curr;
+    }
+}
+
+void delete (struct node **h)
+{
+    struct node *ptr;
+    int p;
+    printf("Enter the position at which you want to delete : ");
+    scanf("%d", &p);
+
+    if (*h == NULL)
+    {
+        printf("Linked List is Empty.");
+    }
+    else if (p == 1)
+    {
+        ptr = *h;
+        *h = ptr->next;
+        free(ptr);
+    }
+    else
+    {
+        ptr = *h;
+        struct node *prv;
+        int i = 1;
+        while (i < p && ptr != NULL)
+        {
+            i++;
+            prv = ptr;
+            ptr = ptr->next;
+        }
+        if (ptr == NULL)
+        {
+            printf("Not found.");
+        }
+        else
+        {
+            prv->next = ptr->next;
+            free(ptr);
+        }
+    }
+}
+*/
